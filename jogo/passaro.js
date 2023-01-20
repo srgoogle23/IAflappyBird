@@ -39,24 +39,24 @@ class Passaro {
         image(spritePassaro, this.x, this.y, this.r * 2, this.r * 2);
     }
 
-    pensar(pipes) {
+    pensar(canos) {
 
-        let closest = null;
+        let maisPerto = null;
         let record = Infinity;
-        for (let i = 0; i < pipes.length; i++) {
-            let diff = pipes[i].x - this.x;
+        for (let i = 0; i < canos.length; i++) {
+            let diff = canos[i].x - this.x;
             if (diff > 0 && diff < record) {
                 record = diff;
-                closest = pipes[i];
+                maisPerto = canos[i];
             }
         }
 
-        if (closest != null) {
+        if (maisPerto != null) {
 
             let inputs = [];
-            inputs[0] = map(closest.x, this.x, width, 0, 1);
-            inputs[1] = map(closest.top, 0, height, 0, 1);
-            inputs[2] = map(closest.bottom, 0, height, 0, 1);
+            inputs[0] = map(maisPerto.x, this.x, width, 0, 1);
+            inputs[1] = map(maisPerto.top, 0, height, 0, 1);
+            inputs[2] = map(maisPerto.bottom, 0, height, 0, 1);
             inputs[3] = map(this.y, 0, height, 0, 1);
             inputs[4] = map(this.velocidade, -5, 5, 0, 1);
 
