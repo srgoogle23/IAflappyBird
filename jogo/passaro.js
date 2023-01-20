@@ -1,4 +1,4 @@
-function mutate(x) {
+function mutacionar(x) {
     if (random(1) < 0.1) {
         let offset = randomGaussian() * 0.5;
         let newx = x + offset;
@@ -8,38 +8,38 @@ function mutate(x) {
     }
 }
 
-class Bird {
-    constructor(brain) {
+class Passaro {
+    constructor(cerebro) {
 
         this.x = 64;
         this.y = height / 2;
         this.r = 12;
 
-        this.gravity = 0.8;
-        this.lift = -12;
-        this.velocity = 0;
+        this.gravidade = 0.8;
+        this.peso = -12;
+        this.velocidade = 0;
 
-        if (brain instanceof NeuralNetwork) {
-            this.brain = brain.copy();
-            this.brain.mutate(mutate);
+        if (cerebro instanceof NeuralNetwork) {
+            this.cerebro = cerebro.copy();
+            this.cerebro.mutate(mutacionar);
         } else {
-            this.brain = new NeuralNetwork(5, 8, 2);
+            this.cerebro = new NeuralNetwork(5, 8, 2);
         }
 
-        this.score = 0;
+        this.pontuacao = 0;
 
-        this.fitness = 0;
+        this.fit = 0;
     }
 
-    copy() {
-        return new Bird(this.brain);
+    copiar() {
+        return new Passaro(this.cerebro);
     }
 
-    show() {
+    mostrar() {
         image(spritePassaro, this.x, this.y, this.r * 2, this.r * 2);
     }
 
-    think(pipes) {
+    pensar(pipes) {
 
         let closest = null;
         let record = Infinity;
@@ -58,9 +58,9 @@ class Bird {
             inputs[1] = map(closest.top, 0, height, 0, 1);
             inputs[2] = map(closest.bottom, 0, height, 0, 1);
             inputs[3] = map(this.y, 0, height, 0, 1);
-            inputs[4] = map(this.velocity, -5, 5, 0, 1);
+            inputs[4] = map(this.velocidade, -5, 5, 0, 1);
 
-            let action = this.brain.predict(inputs);
+            let action = this.cerebro.predict(inputs);
             if (action[1] > action[0]) {
                 this.up();
             }
@@ -68,7 +68,7 @@ class Bird {
     }
 
     up() {
-        this.velocity += this.lift;
+        this.velocidade += this.peso;
     }
 
     bottomTop() {
@@ -76,8 +76,8 @@ class Bird {
     }
 
     update() {
-        this.velocity += this.gravity;
-        this.y += this.velocity;
-        this.score ++;
+        this.velocidade += this.gravidade;
+        this.y += this.velocidade;
+        this.pontuacao ++;
     }
 }

@@ -1,7 +1,7 @@
 function reiniciar() {
     counter = 0;
-    if (bestBird) {
-        bestBird.score = 0;
+    if (bestPassaro) {
+        bestPassaro.pontuacao = 0;
     }
     canos = [];
 }
@@ -17,30 +17,30 @@ function reGerarPassaros() {
     passarosTodos = passarosVivos.slice();
 }
 
-function gerar(oldBirds) {
-    let newBirds = [];
-    for (let i = 0; i < oldBirds.length; i++) {
-        let bird = selecionarFIla(oldBirds);
-        newBirds[i] = bird;
+function gerar(oldPassaros) {
+    let newPassaros = [];
+    for (let i = 0; i < oldPassaros.length; i++) {
+        let bird = selecionarFIla(oldPassaros);
+        newPassaros[i] = bird;
     }
-    return newBirds;
+    return newPassaros;
 }
 
 
 function normalizar(birds) {
 
     for (let i = 0; i < birds.length; i++) {
-        birds[i].score = pow(birds[i].score, 2);
+        birds[i].pontuacao = pow(birds[i].pontuacao, 2);
     }
 
 
     let sum = 0;
     for (let i = 0; i < birds.length; i++) {
-        sum += birds[i].score;
+        sum += birds[i].pontuacao;
     }
 
     for (let i = 0; i < birds.length; i++) {
-        birds[i].fitness = birds[i].score / sum;
+        birds[i].fit = birds[i].pontuacao / sum;
     }
 }
 
@@ -52,11 +52,11 @@ function selecionarFIla(birds) {
     let r = random(1);
 
     while (r > 0) {
-        r -= birds[index].fitness;
+        r -= birds[index].fit;
         index += 1;
     }
 
     index -= 1;
 
-    return birds[index].copy();
+    return birds[index].copiar();
 }

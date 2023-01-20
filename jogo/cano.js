@@ -28,7 +28,7 @@ class Pipe {
     }
   
     // Draw the pipe
-    show() {
+    mostrar() {
       image(canoBaixoSprite, this.x, 0, this.w, this.top);
       image(canoAltoSprite, this.x, height - this.bottom, this.w, this.bottom);
     }
