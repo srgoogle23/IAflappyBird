@@ -17,10 +17,10 @@ class Pipe {
       this.speed = 6;
     }
   
-    // Did this pipe hit a bird?
-    hits(bird) {
-      if ((bird.y - bird.r) < this.top || (bird.y + bird.r) > (height - this.bottom)) {
-        if (bird.x > this.x && bird.x < this.x + this.w) {
+    // Did this pipe hit a passaro?
+    hits(passaro) {
+      if ((passaro.y - passaro.r) < this.top || (passaro.y + passaro.r) > (height - this.bottom)) {
+        if (passaro.x > this.x && passaro.x < this.x + this.w) {
           return true;
         }
       }

@@ -55,9 +55,9 @@ function setup() {
 
     // cria os passaros
     for (let i = 0; i < quantidadePassaros; i++) {
-        let bird = new Passaro();
-        passarosVivos[i] = bird;
-        passarosTodos[i] = bird;
+        let passaro = new Passaro();
+        passarosVivos[i] = passaro;
+        passarosTodos[i] = passaro;
     }
 }
 
@@ -94,25 +94,25 @@ function draw() {
         }
         // estamos rodando com o melhor passaro
         if (RodarMelhor) {
-            bestPassaro.pensar(canos);
-            bestPassaro.update();
+            melhorPassaro.pensar(canos);
+            melhorPassaro.update();
             for (let j = 0; j < canos.length; j++) { // começa denovo se bater
-                if (canos[j].hits(bestPassaro)) {
+                if (canos[j].hits(melhorPassaro)) {
                     reiniciar();
                     break;
                 }
             }
 
-            if (bestPassaro.bottomTop()) {
+            if (melhorPassaro.bottomTop()) {
                 reiniciar();
             }
 
         } else {
             for (let i = passarosVivos.length - 1; i >= 0; i--) {
-                let bird = passarosVivos[i];
+                let passaro = passarosVivos[i];
 
-                bird.pensar(canos);
-                bird.update();
+                passaro.pensar(canos);
+                passaro.update();
 
                 for (let j = 0; j < canos.length; j++) {
                     if (canos[j].hits(passarosVivos[i])) {
@@ -121,7 +121,7 @@ function draw() {
                     }
                 }
 
-                if (bird.bottomTop()) {
+                if (passaro.bottomTop()) {
                     passarosVivos.splice(i, 1);
                 }
 
@@ -147,10 +147,10 @@ function draw() {
 
         if (temprecorde > recorde) {
             recorde = temprecorde;
-            bestPassaro = tempBestPassaro;
+            melhorPassaro = tempBestPassaro;
         }
     } else {
-        temprecorde = bestPassaro.pontuacao;
+        temprecorde = melhorPassaro.pontuacao;
         if (temprecorde > recorde) {
             recorde = temprecorde;
         }
@@ -162,7 +162,7 @@ function draw() {
     }
 
     if (RodarMelhor) {
-        bestPassaro.mostrar();
+        melhorPassaro.mostrar();
     } else {
         for (let i = 0; i < passarosVivos.length; i++) {
             passarosVivos[i].mostrar();

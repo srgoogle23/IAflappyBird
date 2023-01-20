@@ -1,7 +1,7 @@
 function reiniciar() {
     counter = 0;
-    if (bestPassaro) {
-        bestPassaro.pontuacao = 0;
+    if (melhorPassaro) {
+        melhorPassaro.pontuacao = 0;
     }
     canos = [];
 }
@@ -20,43 +20,42 @@ function reGerarPassaros() {
 function gerar(oldPassaros) {
     let newPassaros = [];
     for (let i = 0; i < oldPassaros.length; i++) {
-        let bird = selecionarFIla(oldPassaros);
-        newPassaros[i] = bird;
+        let passaro = selecionarFIla(oldPassaros);
+        newPassaros[i] = passaro;
     }
     return newPassaros;
 }
 
 
-function normalizar(birds) {
+function normalizar(passaros) {
 
-    for (let i = 0; i < birds.length; i++) {
-        birds[i].pontuacao = pow(birds[i].pontuacao, 2);
+    for (let i = 0; i < passaros.length; i++) {
+        passaros[i].pontuacao = pow(passaros[i].pontuacao, 2);
     }
-
 
     let sum = 0;
-    for (let i = 0; i < birds.length; i++) {
-        sum += birds[i].pontuacao;
+    for (let i = 0; i < passaros.length; i++) {
+        sum += passaros[i].pontuacao;
     }
 
-    for (let i = 0; i < birds.length; i++) {
-        birds[i].fit = birds[i].pontuacao / sum;
+    for (let i = 0; i < passaros.length; i++) {
+        passaros[i].fit = passaros[i].pontuacao / sum;
     }
 }
 
 
-function selecionarFIla(birds) {
+function selecionarFIla(passaros) {
 
     let index = 0;
 
     let r = random(1);
 
     while (r > 0) {
-        r -= birds[index].fit;
+        r -= passaros[index].fit;
         index += 1;
     }
 
     index -= 1;
 
-    return birds[index].copiar();
+    return passaros[index].copiar();
 }
