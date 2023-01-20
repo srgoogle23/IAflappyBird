@@ -66,11 +66,11 @@ function toggleState() {
     RodarMelhor = ! RodarMelhor;
     // mostra o melhor passaro
     if (RodarMelhor) {
-        resetGame();
+        reiniciar();
         RodarMelhorBotao.html('continue training');
         // vai treinar mais
     } else {
-        nextGeneration();
+        reGerarPassaros();
         RodarMelhorBotao.html('Run Best');
     }
 }
@@ -98,13 +98,13 @@ function draw() {
             bestBird.update();
             for (let j = 0; j < canos.length; j++) { // começa denovo se bater
                 if (canos[j].hits(bestBird)) {
-                    resetGame();
+                    reiniciar();
                     break;
                 }
             }
 
             if (bestBird.bottomTop()) {
-                resetGame();
+                reiniciar();
             }
 
         } else {
@@ -168,7 +168,7 @@ function draw() {
             passarosVivos[i].show();
         }
         if (passarosVivos.length == 0) {
-            nextGeneration();
+            reGerarPassaros();
         }
     }
 }
