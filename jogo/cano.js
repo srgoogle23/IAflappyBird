@@ -1,50 +1,39 @@
-class Pipe {
+class Cano {
     constructor() {
-  
-      // How big is the empty space
-      let spacing = 125;
-      // Where is th center of the empty space
-      let centery = random(spacing, height - spacing);
-  
-      // Top and bottom of pipe
-      this.top = centery - spacing / 2;
-      this.bottom = height - (centery + spacing / 2);
-      // Starts at the edge
-      this.x = width;
-      // Width of pipe
-      this.w = 80;
-      // How fast
-      this.speed = 6;
+
+        let espaco = 125;
+        let centro = random(espaco, height - espaco);
+
+        this.top = centro - espaco / 2;
+        this.bottom = height -(centro + espaco / 2);
+        this.x = width;
+        this.w = 80;
+        this.velocidade = 6;
     }
-  
-    // Did this pipe hit a passaro?
-    hits(passaro) {
-      if ((passaro.y - passaro.r) < this.top || (passaro.y + passaro.r) > (height - this.bottom)) {
-        if (passaro.x > this.x && passaro.x < this.x + this.w) {
-          return true;
+
+    bateu(passaro) {
+        if ((passaro.y - passaro.r) < this.top || (passaro.y + passaro.r) > (height - this.bottom)) {
+            if (passaro.x > this.x && passaro.x < this.x + this.w) {
+                return true;
+            }
         }
-      }
-      return false;
-    }
-  
-    // Draw the pipe
-    mostrar() {
-      image(canoBaixoSprite, this.x, 0, this.w, this.top);
-      image(canoAltoSprite, this.x, height - this.bottom, this.w, this.bottom);
-    }
-  
-    // Update the pipe
-    update() {
-      this.x -= this.speed;
-    }
-  
-    // Has it moved offscreen?
-    offscreen() {
-      if (this.x < -this.w) {
-        return true;
-      } else {
         return false;
-      }
     }
-  }
-  
+
+    mostrar() {
+        image(canoBaixoSprite, this.x, 0, this.w, this.top);
+        image(canoAltoSprite, this.x, height - this.bottom, this.w, this.bottom);
+    }
+
+    atualizar() {
+        this.x -= this.velocidade;
+    }
+
+    saiuDaTela() {
+        if (this.x < -this.w) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

@@ -63,17 +63,17 @@ function draw() {
 
     for (let n = 0; n < cycles; n++) {
         for (let i = canos.length - 1; i >= 0; i--) {
-            canos[i].update();
-            if (canos[i].offscreen()) {
+            canos[i].atualizar();
+            if (canos[i].saiuDaTela()) {
                 canos.splice(i, 1);
             }
         }
 
         if (RodarMelhor) {
             melhorPassaro.pensar(canos);
-            melhorPassaro.update();
+            melhorPassaro.atualizar();
             for (let j = 0; j < canos.length; j++) {
-                if (canos[j].hits(melhorPassaro)) {
+                if (canos[j].bateu(melhorPassaro)) {
                     reiniciar();
                     break;
                 }
@@ -88,10 +88,10 @@ function draw() {
                 let passaro = passarosVivos[i];
 
                 passaro.pensar(canos);
-                passaro.update();
+                passaro.atualizar();
 
                 for (let j = 0; j < canos.length; j++) {
-                    if (canos[j].hits(passarosVivos[i])) {
+                    if (canos[j].bateu(passarosVivos[i])) {
                         passarosVivos.splice(i, 1);
                         break;
                     }
@@ -105,7 +105,7 @@ function draw() {
         }
 
         if (counter % 75 == 0) {
-            canos.push(new Pipe());
+            canos.push(new Cano());
         }
         counter++;
     }

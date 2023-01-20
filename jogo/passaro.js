@@ -75,7 +75,7 @@ class Passaro {
         return(this.y > height || this.y < 0);
     }
 
-    update() {
+    atualizar() {
         this.velocidade += this.gravidade;
         this.y += this.velocidade;
         this.pontuacao ++;
