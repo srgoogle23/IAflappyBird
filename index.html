@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/style.css">  
+  <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+  <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <script language="javascript" type="text/javascript" src="cerebro/matrix.js"></script>
+  <script language="javascript" type="text/javascript" src="cerebro/nn.js"></script>
+  <script language="javascript" type="text/javascript" src="jogo/desenhos.js"></script>
+  <script language="javascript" type="text/javascript" src="jogo/jogo.js"></script>
+  <script language="javascript" type="text/javascript" src="jogo/passaro.js"></script>
+  <script language="javascript" type="text/javascript" src="jogo/cano.js"></script>
+
+</head>
+
+<body class="back">
+  <div id="canvascontainer"></div>
+  <div class="bg">
+    Speed: <input id="sliderVelocidade" type="range" min="1" max="10" value="1"> <span id="speed">1</span>
+    <br/> Pontuação: <span id="hs">0</span>
+    <br/> Record: <span id="ahs">0</span>
+  </div>
+  <p id="best">
+    <span>Parar Treinamento</span>
+  </p>
+</body>
+
+
+</html>
