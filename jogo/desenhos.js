@@ -2,7 +2,7 @@ let imagemFundo;
 let spritePassaro;
 let canoBaixoSprite;
 let canoAltoSprite;
-let quantidadePassaros = 500;
+let quantidadePassaros = 100;
 let passarosVivos = [];
 let passarosTodos = [];
 let canos = [];
@@ -47,10 +47,10 @@ function toggleState() {
     RodarMelhor = ! RodarMelhor;
     if (RodarMelhor) {
         reiniciar();
-        RodarMelhorBotao.html('continue training');
+        RodarMelhorBotao.html('Continuar Treinando');
     } else {
         reGerarPassaros();
-        RodarMelhorBotao.html('Run Best');
+        RodarMelhorBotao.html('Parar Treinamento');
     }
 }
 
