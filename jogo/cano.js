@@ -1,80 +1,50 @@
-class Cano {
-    constructor() { /**
-       * Tamanho do espaço vazio entre os canos
-       */
-        let tamanho = 125;
-
-        /**
-       * Centro do espaço vazio entre os canos
-       */
-        let centro = random(tamanho, altura - tamanho);
-
-        /**
-       * Altura do topo do cano
-       */
-        this.topo = centro - tamanho / 2;
-
-        /**
-       * Altura do fundo do cano
-       */
-        this.baixo = altura -(centro + tamanho / 2);
-
-        /**
-       * Posição do cano
-       */
-        this.x = largura;
-
-        /**
-       * Largura do cano
-       */
-        this.w = 80;
-
-        /**
-       * Velocidade do cano
-       */
-        this.velocidade = 6;
+class Pipe {
+    constructor() {
+  
+      // How big is the empty space
+      let spacing = 125;
+      // Where is th center of the empty space
+      let centery = random(spacing, height - spacing);
+  
+      // Top and bottom of pipe
+      this.top = centery - spacing / 2;
+      this.bottom = height - (centery + spacing / 2);
+      // Starts at the edge
+      this.x = width;
+      // Width of pipe
+      this.w = 80;
+      // How fast
+      this.speed = 6;
     }
-
-    /**
-     * Verifica se o passáro bateu no cano
-     * 
-     * @param {*} passaro 
-     * @returns 
-     */
-    bateu(passaro) {
-        if ((passaro.y - passaro.r) < this.topo || (passaro.y + passaro.r) > (altura - this.baixo)) {
-            if (passaro.x > this.x && passaro.x < this.x + this.w) {
-                return true;
-            }
+  
+    // Did this pipe hit a bird?
+    hits(bird) {
+      if ((bird.y - bird.r) < this.top || (bird.y + bird.r) > (height - this.bottom)) {
+        if (bird.x > this.x && bird.x < this.x + this.w) {
+          return true;
         }
+      }
+      return false;
+    }
+  
+    // Draw the pipe
+    show() {
+      image(canoBaixoSprite, this.x, 0, this.w, this.top);
+      image(canoAltoSprite, this.x, height - this.bottom, this.w, this.bottom);
+    }
+  
+    // Update the pipe
+    update() {
+      this.x -= this.speed;
+    }
+  
+    // Has it moved offscreen?
+    offscreen() {
+      if (this.x < -this.w) {
+        return true;
+      } else {
         return false;
+      }
     }
-
-    /**
-     * Mostra o cano
-     */
-    mostrar() {
-        image(pipeBodySprite, this.x, 0, this.w, this.topo);
-        image(pipePeakSprite, this.x, altura - this.baixo, this.w, this.baixo);
-    }
-
-    /**
-     * Atualiza o cano
-     */
-    atualizar() {
-        this.x -= this.velocidade;
-    }
-
-    /**
-     * Se o cano saiu da tela, retorna true, senão, retorna false
-     * 
-     * @returns boolean
-     */
-    saiuDaTela() {
-        if (this.x < -this.w) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
+  }
+  
