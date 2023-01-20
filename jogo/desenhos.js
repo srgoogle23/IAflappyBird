@@ -2,32 +2,16 @@ let imagemFundo;
 let spritePassaro;
 let canoBaixoSprite;
 let canoAltoSprite;
-
-// quantidade de passaros
 let quantidadePassaros = 500;
-
-// Array de passaros vivos
 let passarosVivos = [];
-
-// Array de todos os passaros
 let passarosTodos = [];
-
-// Array de canos
 let canos = [];
-
-// contador de frames
 let counter = 0;
-
-// Elementos da interface
 let sliderVelocidade;
 let velocidadeSpan;
 let recordSpan;
 let tempoSpan;
-
-// Record do jogo
 let recorde = 0;
-
-// treinar ou rodar melhor
 let RodarMelhor = false;
 let RodarMelhorBotao;
 
@@ -45,7 +29,6 @@ function setup() {
     canvas.position(x, y);
     canvas.parent('canvascontainer');
 
-    // configurar interface
     sliderVelocidade = select('#sliderVelocidade');
     velocidadeSpan = select('#speed');
     recordSpan = select('#hs');
@@ -53,7 +36,6 @@ function setup() {
     RodarMelhorBotao = select('#best');
     RodarMelhorBotao.mousePressed(toggleState);
 
-    // cria os passaros
     for (let i = 0; i < quantidadePassaros; i++) {
         let passaro = new Passaro();
         passarosVivos[i] = passaro;
@@ -61,14 +43,11 @@ function setup() {
     }
 }
 
-// muda o estado da simulação
 function toggleState() {
     RodarMelhor = ! RodarMelhor;
-    // mostra o melhor passaro
     if (RodarMelhor) {
         reiniciar();
         RodarMelhorBotao.html('continue training');
-        // vai treinar mais
     } else {
         reGerarPassaros();
         RodarMelhorBotao.html('Run Best');
@@ -79,12 +58,9 @@ function toggleState() {
 function draw() {
     background(imagemFundo);
 
-    // aumentar a velocidade da simulação
     let cycles = sliderVelocidade.value();
     velocidadeSpan.html(cycles);
 
-
-    // quanto mais rápido, mais vezes o jogo é atualizado
     for (let n = 0; n < cycles; n++) {
         for (let i = canos.length - 1; i >= 0; i--) {
             canos[i].update();
@@ -92,11 +68,11 @@ function draw() {
                 canos.splice(i, 1);
             }
         }
-        // estamos rodando com o melhor passaro
+
         if (RodarMelhor) {
             melhorPassaro.pensar(canos);
             melhorPassaro.update();
-            for (let j = 0; j < canos.length; j++) { // começa denovo se bater
+            for (let j = 0; j < canos.length; j++) {
                 if (canos[j].hits(melhorPassaro)) {
                     reiniciar();
                     break;
